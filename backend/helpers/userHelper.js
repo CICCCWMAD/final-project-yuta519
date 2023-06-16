@@ -1,6 +1,15 @@
-const { genSalt, hash } = require('bcrypt');
+import * as bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
-// function for hashed password
-const hashPassword = async (password) => {};
+export const hashPassword = async (password) => {
+  return await bcrypt.hash(password, 10);
+};
 
-module.exports = { hashPassword };
+export const comparePassword = async(password, hash) => {
+  return await bcrypt.compare(password, hash);
+}
+
+
+export const createJwt = (payload) => {
+  return jwt.sign(payload, 'secret');
+}

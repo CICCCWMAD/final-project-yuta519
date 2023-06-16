@@ -1,9 +1,24 @@
-const getRoom = async (req, res) => {};
+import { Chatroom } from "../models/chatroom.js";
 
-const createRoom = async (req, res) => {};
+export const createRoom = async (req, res) => {
+  const { title } = req.body;
+  const chatroom = new Chatroom({ title });
+  await chatroom.save();
+  res.send('Created chatroom');
+};
 
-const deleteRoom = async (req, res) => {};
+export const getRooms = async (_, res) => {
+  const chatrooms = await Chatroom.find();
+  res.json(chatrooms);
+};
 
-const updateRoom = async (req, res) => {};
+export const getRoomById = async (req, res) => {
+  const { _id } = req.params;
+  const chatroom = await Chatroom.findOne({_id });
+  res.json(chatroom);
+};
 
-module.exports = { getRoom, createRoom, deleteRoom, updateRoom };
+
+
+export const deleteRoom = async (req, res) => {};
+export const updateRoom = async (req, res) => {};
