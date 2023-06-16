@@ -1,8 +1,9 @@
-const express = require('express');
-const router = express.Router();
+import express from 'express';
+import { createRoom, getRooms } from '../controllers/chatRoomController.js';
 
-const { getTags } = require('../controllers/tagsController');
+var chatroomRoute = express.Router();
 
-router.route('/').get(getTags);
+chatroomRoute.route('/').post(createRoom);
+chatroomRoute.route('/').get(getRooms);
 
-module.exports = router;
+export default chatroomRoute;
